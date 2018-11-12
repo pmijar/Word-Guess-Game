@@ -23,8 +23,7 @@
         <div class="jumbotron">
             <div class="row">
                 <div class="col-sm-12 btn-group">
-                            <button type="button" class="btn btn-primary">Hint</button>
-                            <button type="button" class="btn btn-danger">Reset</button> 
+                    <h2>This is Game # : <span id="gameCount"></span></h2>
                 </div>               
             </div>
         </div>
@@ -35,8 +34,12 @@
             <div class="col-sm-5">  
                     <div class="jumbotron">
                             <h5>Score Section</h5><br>
+                            <p> Game Remaining : <span id="Games"><strong>0</strong></span></p>                           
                             <p> Wins # : <span id="Wins"><strong>0</strong></span></p>
-                            <p> Guess Remaining : <span id="GuessRemaining"><strong>5</strong></span></p>                            
+                            <p> Guess Remaining : <span id="GuessRemaining"><strong>5</strong></span></p>     
+                            <br>
+                            <p>Message : <span id="entryMessage"></span></p>     
+                            <h4>You just typed : <span id="UserSelection">...Nothing.</span></h4>                  
                     </div>   
             </div>
             <div class = "col-sm-7">
@@ -44,24 +47,17 @@
                 <div class = "row">
                     <div class ="col-sm-12">
                             <h5> Question</h5>  
-                            <p> Your Question : <br>
-                            <span id="Question">Question Statement</span></p> 
+                            <p><span id="Question">Question Statement</span></p> 
                     </div>
                 </div>
                 <br>
                 <div class = "row">
                         <div class ="col-sm-12">
-                                <h5>Underlined Selection made </h5>
-                                 <span id="WordLetter">WordLetter</span>
+                                <h5>Valid Selections</h5><br>
+                                 <span id="WordLetter"></span>
                         </div>
                 </div> 
-                <br>              
-                <div class = "row">
-                        <div class ="col-sm-12">
-                                <h5>You just typed : <span id="UserSelection">...Nothing.</span></h4>
-                        </div>
-                </div>   
-                <br>            
+                <br>                      
                 <div class = "row">
                         <div class ="col-sm-12">
                                 <h5>Letter selected : <span id="CapturedUserSelection">...Nothing.</span></h5>
@@ -69,7 +65,7 @@
                 </div>  
                 <div class = "row">
                         <div class ="col-sm-12">
-                                <h5>Answer Location Index : <span id="CapturedUserSelection">...Nothing.</span></h5>
+                               <h5>Answer Location Index : <span id="CapturedUserSelection">...Nothing.</span></h5>
                         </div>
                 </div>                  
                 </div>
