@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>Word Game</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+ <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+ 
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12" style="text-align: center; font-size: 40px">
+                    Word Guess Game
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="jumbotron">
+            <div class="row">
+                <div class="col-sm-12 btn-group">
+                            <button type="button" class="btn btn-primary">Hint</button>
+                            <button type="button" class="btn btn-danger">Reset</button> 
+                </div>               
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-5">  
+                    <div class="jumbotron">
+                            <h5>Score Section</h5><br>
+                            <p> Wins # : <span id="Wins"><strong>0</strong></span></p>
+                            <p> Guess Remaining : <span id="GuessRemaining"><strong>5</strong></span></p>                            
+                    </div>   
+            </div>
+            <div class = "col-sm-7">
+                <div class="jumbotron">
+                <div class = "row">
+                    <div class ="col-sm-12">
+                            <h5> Question</h5>  
+                            <p> Your Question : <br>
+                            <span id="Question">Question Statement</span></p> 
+                    </div>
+                </div>
+                <br>
+                <div class = "row">
+                        <div class ="col-sm-12">
+                                <h5>Underlined Selection made </h5>
+                                 <span id="WordLetter">WordLetter</span>
+                        </div>
+                </div> 
+                <br>              
+                <div class = "row">
+                        <div class ="col-sm-12">
+                                <h5>You just typed : <span id="UserSelection">...Nothing.</span></h4>
+                        </div>
+                </div>   
+                <br>            
+                <div class = "row">
+                        <div class ="col-sm-12">
+                                <h5>Letter selected : <span id="CapturedUserSelection">...Nothing.</span></h5>
+                        </div>
+                </div>  
+                <div class = "row">
+                        <div class ="col-sm-12">
+                                <h5>Answer Location Index : <span id="CapturedUserSelection">...Nothing.</span></h5>
+                        </div>
+                </div>                  
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/javascript" src="assets/javascript/games.js"></script>
+ 
+
+</body>
+</html>
