@@ -11,7 +11,7 @@ var v_CapturedUserSelection = document.getElementById("CapturedUserSelection");
 
 // Global Array to store the selection made by user on key down
 var v_UserSelectionArray = [];
-
+var testing = [];
 
 /* Global Question object that stores the key value pair, 
 The Key is an index common to both question and answer 
@@ -49,16 +49,27 @@ document.onkeyup = function(event) {
     updateUserSelection(v_KeyEntered);
     displayUserSelections();
     var indexQA = Math.round(Math.random() * 5);
+
     v_Question.textContent = getQuestion(indexQA);
     v_WordLetter.textContent = getAnswer(indexQA);
- 
+    
+    testing = findSimilarAnswerCharacter(v_KeyEntered, indexQA);
+    /*
+    console.log(getAnswer(indexQA).length);
+
+    for(i=0; i < getAnswer(indexQA).length; i++){    
+        console.log(getAnswer(indexQA)[i]);
+    }*/
+
+
 };
 
-//updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys
+//updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys array
 function updateUserSelection(letter ){
     v_UserSelectionArray[v_UserSelectionArray.length] = letter;
 };
 
+//displayUserSelections function displays all the user character selections made
 function displayUserSelections(){
      var displaySelection = "";
      for(i=0;i< v_UserSelectionArray.length; i++ ) {
@@ -67,19 +78,23 @@ function displayUserSelections(){
     v_CapturedUserSelection.textContent = displaySelection ;
     };
 
+
+//getQuestion function returns the Question statement based on Key passed to it
 function getQuestion(keyIndex){
     return QuestionObject[keyIndex];
 }
 
+
+//getAnswer function returns the Answer statement based on Key passed to it
 function getAnswer(keyIndex){
     return AnswerObject[keyIndex];
 }
 
 function findSimilarAnswerCharacter(letter, keyIndex){
-    var str = getAnswer(keyIndex);
+    var j = 0;
     var letterIndexArray = [];
-    for(i=0, j=0;i<str.length; i++){
-        if(str.charAt(i).toLocaleUpperCase == letter)
+    for(i=0; i < getAnswer(keyIndex).length; i++){
+        if(getAnswer(keyIndex)[i].toLocaleUpperCase() == letter)
         {     
         letterIndexArray[j] = i;
         console.log(i);
