@@ -29,22 +29,11 @@ var v_UserCorrectSelectionArray = [];
 // Reset function to reset all the variables after every game
 
 function reset(){
-    g_Guesses = 5 ;
-    g_Wins = 0 ;
+    g_Guesses = 5 ; ;
+    alert("In Reset Function : g_Guesses = " + g_Guesses + " g_Wins = " + g_Wins);
     v_UserSelectionArray = [];
-    testing = [];
-   // displayLetters = [];
     v_UserCorrectSelectionArray = [];
-
-  /*  v_Wins = "";
-    v_GuessRemaining = "";
-    v_Question = "";
-    v_WordLetter = "";
-    v_UserSelection = "";
-    v_CapturedUserSelection = "";
-    v_EntryMessage = "";
-    v_Games = "";
-    v_gameCount = ""; */
+    v_GuessRemaining.textContent = g_Guesses;
 };
 
 
@@ -93,14 +82,8 @@ document.onkeyup = function(event) {
     v_Wins.textContent = g_Wins;
     v_gameCount.textContent = g_Games;
     v_Games.textContent = g_Games;
-
-    
-
     v_KeyEntered = event.key.toLocaleUpperCase();
     v_UserSelection.textContent = v_KeyEntered; 
-
-
-
 
 
 if(event.keyCode >= 65 && event.keyCode <= 90) {
@@ -115,9 +98,10 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
 
     if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
         reset();
+        refreshDisplay();
         indexQA = Math.round(Math.random() * 5);
         v_Question.textContent = QuestionObject.getQuestion(indexQA);
-       // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
+        v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
         for(i=0; i < AnswerObject.getAnswer(indexQA).length; i++){
             v_UserCorrectSelectionArray[i] = " _ ";
         };
@@ -130,31 +114,39 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
     }
     else{
         if(g_Guesses <= 0 ){
-            console.log("Inside g_Guesses< = 0 Block");
+            console.log("Inside g_Guesses <= 0 Block");
             flag_GameChange = true;
             g_Games = g_Games - 1; // No of guess is zero so the user game count is decreased
             v_Games.textContent =  g_Games ;
-           // return; // break of this block of code
+            refreshDisplay();
+            return; // break of this block of code
         }
         else{
             flag_GameChange = false;
+            alert("Inside g_Guesses > 0 Block");
             console.log("Inside g_Guesses > 0 Block");
             if( isLetterPresent(v_KeyEntered, indexQA)/* if the typed key matches the answer presented TRUE or FALSE*/){
+                    alert("isLetterPresent Block");
                     console.log("isLetterPresent Block");
                     updateUserCorrectSelection(v_KeyEntered, indexQA); // Displays the correct value selected
                     displayMatchedTypedLetter(v_KeyEntered, indexQA); 
-                    if( isAnswerMatch(indexQA) /* if the letters entered matched the answer letters*/){
+                    /* if the letters entered matched the answer letters*/
+                    if( isAnswerMatch(indexQA) ){
+                        alert("isAnswerMatch Block ^^^^^^^^^^^^^^");
                         console.log("isAnswerMatch Block");                        
                         g_Wins = g_Wins + 1;
                         v_Wins.textContent = g_Wins;
-                        flag_GameChange = true;
                         g_Games = g_Games - 1; // No of guess is zero so the user game count is decreased
                         v_Games.textContent =  g_Games ;
+                        refreshDisplay();
+                        flag_GameChange = true;
+                        return;
                     }
                 }
                     else{
                         g_Guesses = g_Guesses - 1;
                         v_GuessRemaining.textContent = g_Guesses;
+                        refreshDisplay();
                     }
             }
         }
@@ -216,34 +208,54 @@ function findSimilarAnswerCharacter(letter, keyIndex){
 function displayMatchedTypedLetter(letter, keyIndex){
     var displayString = "";
     for (i = 0; i< v_UserCorrectSelectionArray.length; i++){ 
-        displayString = displayString + v_UserCorrectSelectionArray[i];
+        displayString = displayString + " " + v_UserCorrectSelectionArray[i];
     }
     v_WordLetter.textContent = displayString;
 };
 
 
-//6: User Selections matched with the answer letters
+//6: User Selections matched with the answer letters  [PROBLEM DOES NOT RETURN CORRECT TRUE OR FALSE]
 
 function isAnswerMatch(keyIndex){
-    for(i=0;i<AnswerObject.getAnswer(keyIndex).length; i++){
-        if(AnswerObject.getAnswer(keyIndex)[i] != v_UserCorrectSelectionArray[i]){
-            console.log("isAnswerMatch Function call : FALSE");
-            return false;
+  var bool;
+  for(i=0;i<AnswerObject.getAnswer(keyIndex).length; i++){
+        if(AnswerObject.getAnswer(keyIndex)[i] == v_UserCorrectSelectionArray[i]){
+            console.log("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
+            bool = true;
+            continue;
+        }
+        else{
+            bool = false;
+            break;
         }
     }
-    console.log("isAnswerMatch Function call : TRUE");
-    return true;
+    alert("isAnswerMatch Function call bool : " + bool);
+    return bool;
 }
 
 function updateUserCorrectSelection(letter, keyIndex){
     var matchedLetter = findSimilarAnswerCharacter(letter, keyIndex);
     for (i = 0, j = 0; i<AnswerObject.getAnswer(keyIndex).length; i++){
-        if( i == matchedLetter[j]){ 
-            v_UserCorrectSelectionArray[i] = " "+letter+" ";
+        if( i === matchedLetter[j]){ 
+            v_UserCorrectSelectionArray[i] = letter;
             j++;
         }
         else{
             continue  ;          
         };
     };
+}
+
+function reset(){
+    g_Guesses = 5 ;
+    g_Wins = 0 ;
+    v_UserSelectionArray = [];
+    v_UserCorrectSelectionArray = [];
+};
+
+function refreshDisplay()
+{
+    v_Games.textContent =  g_Games ;
+    v_GuessRemaining.textContent = g_Guesses;   
+    v_Wins.textContent = g_Wins;
 }
