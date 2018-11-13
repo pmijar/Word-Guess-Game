@@ -84,6 +84,7 @@ document.onkeyup = function(event) {
     v_Games.textContent = g_Games;
     v_KeyEntered = event.key.toLocaleUpperCase();
     v_UserSelection.textContent = v_KeyEntered; 
+    displayMatchedTypedLetter();
 
 
 if(event.keyCode >= 65 && event.keyCode <= 90) {
@@ -101,7 +102,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
         refreshDisplay();
         indexQA = Math.round(Math.random() * 5);
         v_Question.textContent = QuestionObject.getQuestion(indexQA);
-        v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
+       // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
         for(i=0; i < AnswerObject.getAnswer(indexQA).length; i++){
             v_UserCorrectSelectionArray[i] = " _ ";
         };
@@ -123,16 +124,16 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
         }
         else{
             flag_GameChange = false;
-            alert("Inside g_Guesses > 0 Block");
+        //    alert("Inside g_Guesses > 0 Block");
             console.log("Inside g_Guesses > 0 Block");
             if( isLetterPresent(v_KeyEntered, indexQA)/* if the typed key matches the answer presented TRUE or FALSE*/){
-                    alert("isLetterPresent Block");
+             //       alert("isLetterPresent Block");
                     console.log("isLetterPresent Block");
                     updateUserCorrectSelection(v_KeyEntered, indexQA); // Displays the correct value selected
-                    displayMatchedTypedLetter(v_KeyEntered, indexQA); 
+                    displayMatchedTypedLetter(); 
                     /* if the letters entered matched the answer letters*/
                     if( isAnswerMatch(indexQA) ){
-                        alert("isAnswerMatch Block ^^^^^^^^^^^^^^");
+                    //    alert("isAnswerMatch Block ^^^^^^^^^^^^^^");
                         console.log("isAnswerMatch Block");                        
                         g_Wins = g_Wins + 1;
                         v_Wins.textContent = g_Wins;
@@ -205,7 +206,7 @@ function findSimilarAnswerCharacter(letter, keyIndex){
 
 
 //5: 
-function displayMatchedTypedLetter(letter, keyIndex){
+function displayMatchedTypedLetter(){
     var displayString = "";
     for (i = 0; i< v_UserCorrectSelectionArray.length; i++){ 
         displayString = displayString + " " + v_UserCorrectSelectionArray[i];
@@ -217,11 +218,11 @@ function displayMatchedTypedLetter(letter, keyIndex){
 //6: User Selections matched with the answer letters  [PROBLEM DOES NOT RETURN CORRECT TRUE OR FALSE]
 
 function isAnswerMatch(keyIndex){
-  var bool;
+  var bool = true;
   for(i=0;i<AnswerObject.getAnswer(keyIndex).length; i++){
-        if(AnswerObject.getAnswer(keyIndex)[i] == v_UserCorrectSelectionArray[i]){
+        if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() === v_UserCorrectSelectionArray[i].toLocaleUpperCase()){
             console.log("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
-            bool = true;
+           // alert("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
             continue;
         }
         else{
@@ -229,7 +230,7 @@ function isAnswerMatch(keyIndex){
             break;
         }
     }
-    alert("isAnswerMatch Function call bool : " + bool);
+   // alert("isAnswerMatch Function call bool : " + bool);
     return bool;
 }
 
@@ -248,7 +249,6 @@ function updateUserCorrectSelection(letter, keyIndex){
 
 function reset(){
     g_Guesses = 5 ;
-    g_Wins = 0 ;
     v_UserSelectionArray = [];
     v_UserCorrectSelectionArray = [];
 };
