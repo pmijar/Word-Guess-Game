@@ -13,8 +13,7 @@ var v_gameCount = document.getElementById("gameCount");
 
 // Global Array to store the selection made by user on key down
 var v_UserSelectionArray = [];
-var testing = [];
-
+var v_UserCorrectSelectionArray = [];
 
 // Global Variables need to be reset on reset operation;
 var g_Guesses = 5;
@@ -22,19 +21,7 @@ var g_Games = 3;
 var g_Wins = 0;
 var flag_GameChange = true;
 var indexQA ;
-//var displayLetters = [];
-var v_UserCorrectSelectionArray = [];
-
-// common functions used
-// Reset function to reset all the variables after every game
-
-function reset(){
-    g_Guesses = 5 ; ;
-    alert("In Reset Function : g_Guesses = " + g_Guesses + " g_Wins = " + g_Wins);
-    v_UserSelectionArray = [];
-    v_UserCorrectSelectionArray = [];
-    v_GuessRemaining.textContent = g_Guesses;
-};
+var g_GamesCounter = 0;
 
 
 
@@ -48,9 +35,7 @@ var QuestionObject = {
     3:"What is a Geiger Counter used to detect?",
     4:"Which type of dog has breeds called Scottish, Welsh and Irish?",
     5:"Babe Ruth is associated with which sport?",
-
     //getQuestion function returns the Question statement based on Key passed to it
-
     getQuestion: function (keyIndex){
         return QuestionObject[keyIndex];
     }
@@ -66,61 +51,56 @@ var AnswerObject = {
     3:"Radiation",
     4:"Terrier",
     5:"Baseball",
-
     //getAnswer function returns the Answer statement based on Key passed to it
     getAnswer: function(keyIndex){
     return AnswerObject[keyIndex];
     }
 };
 
+
+
+
+
+// Before we have a onkeyup event the indexQA should be selected and question identified done in newGame() function;
+newGame();
+
 // Next, we give JavaScript a function to execute when onkeyup event fires.
 
-v_gameCount.textContent = g_Games;
-v_Wins.textContent = g_Wins;
+ document.onkeyup = function(event) {
 
-document.onkeyup = function(event) {
     v_Wins.textContent = g_Wins;
-    v_gameCount.textContent = g_Games;
+    v_gameCount.textContent = g_GamesCounter;
     v_Games.textContent = g_Games;
+  //  v_GuessRemaining = g_Guesses;
     v_KeyEntered = event.key.toLocaleUpperCase();
     v_UserSelection.textContent = v_KeyEntered; 
     displayMatchedTypedLetter();
-
-
-if(event.keyCode >= 65 && event.keyCode <= 90) {
-
+//
+ //   newGame();
     console.log(event.key);
     updateUserSelection(v_KeyEntered);
     displayUserSelections();
 
     v_EntryMessage.textContent =  "You typed : " + v_KeyEntered ;
 
-   // displayMatchedTypedLetter(v_KeyEntered, indexQA);
 
-    if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
-        reset();
-        refreshDisplay();
-        indexQA = Math.round(Math.random() * 5);
-        v_Question.textContent = QuestionObject.getQuestion(indexQA);
-       // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
-        for(i=0; i < AnswerObject.getAnswer(indexQA).length; i++){
-            v_UserCorrectSelectionArray[i] = " _ ";
-        };
-    }
+
+// only valid key codes displayed alphabets only
+if(event.keyCode >= 65 && event.keyCode <= 90) {
 
         
-    if(g_Games <= 0){
+    if(g_Games === 0){
         alert("Game Over !!!!");
-        return "Game Over"; // Game Over
     }
     else{
-        if(g_Guesses <= 0 ){
+        if(g_Guesses === 0 ){
             console.log("Inside g_Guesses <= 0 Block");
             flag_GameChange = true;
-            g_Games = g_Games - 1; // No of guess is zero so the user game count is decreased
+            newGame();
+            g_Games--;
+            alert("GUESES  is 0 : flag_GameChange: " + flag_GameChange);
             v_Games.textContent =  g_Games ;
             refreshDisplay();
-            return; // break of this block of code
         }
         else{
             flag_GameChange = false;
@@ -134,18 +114,18 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
                     /* if the letters entered matched the answer letters*/
                     if( isAnswerMatch(indexQA) ){
                     //    alert("isAnswerMatch Block ^^^^^^^^^^^^^^");
-                        console.log("isAnswerMatch Block");                        
-                        g_Wins = g_Wins + 1;
+                        console.log("isAnswerMatch Block ^^^^^^^^^^^^^^");                        
+                        g_Wins++;
                         v_Wins.textContent = g_Wins;
-                        g_Games = g_Games - 1; // No of guess is zero so the user game count is decreased
                         v_Games.textContent =  g_Games ;
                         refreshDisplay();
-                        flag_GameChange = true;
-                        return;
+                        flag_GameChange = !flag_GameChange;
+                        newGame();
+                        alert(" WHEN LETTERS MATCHED flag_GameChange: "+flag_GameChange);
                     }
                 }
                     else{
-                        g_Guesses = g_Guesses - 1;
+                        g_Guesses--;
                         v_GuessRemaining.textContent = g_Guesses;
                         refreshDisplay();
                     }
@@ -154,9 +134,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
     }
 else{
     v_EntryMessage.textContent = "Please enter characters only !!!!";
-   // return;
-}  
-
+} ; 
 };
 
 
@@ -247,7 +225,9 @@ function updateUserCorrectSelection(letter, keyIndex){
     };
 }
 
+
 function reset(){
+    console.log("Inside reset() function");
     g_Guesses = 5 ;
     v_UserSelectionArray = [];
     v_UserCorrectSelectionArray = [];
@@ -255,7 +235,31 @@ function reset(){
 
 function refreshDisplay()
 {
+    console.log("Inside refreshDisplay()");
     v_Games.textContent =  g_Games ;
     v_GuessRemaining.textContent = g_Guesses;   
+    v_Question.textContent = QuestionObject.getQuestion(indexQA);
+    displayMatchedTypedLetter();
+    displayUserSelections();
     v_Wins.textContent = g_Wins;
+    v_gameCount.textContent = g_GamesCounter;
+}
+
+function newGame(){
+    console.log("Inside newGame() ");
+    if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
+        reset();
+        indexQA = Math.round(Math.random() * 5);
+        v_Question.textContent = QuestionObject.getQuestion(indexQA);
+        console.log("New Game Started with indexQA: " + indexQA);
+       // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
+        for(i=0; i < AnswerObject.getAnswer(indexQA).length; i++){
+            v_UserCorrectSelectionArray[i] = " _ ";
+        };
+        g_GamesCounter++;
+      //  g_Games--;
+        refreshDisplay();
+        flag_GameChange = !flag_GameChange;
+    }
+
 }
