@@ -35,6 +35,11 @@ var QuestionObject = {
     3:"What is a Geiger Counter used to detect?",
     4:"Which type of dog has breeds called Scottish, Welsh and Irish?",
     5:"Babe Ruth is associated with which sport?",
+    6:"In the film Babe, what type of animal was Babe?",
+    7:"Which Roman emperor supposedly fiddled while Rome burned?",
+    8:"What is the name of the fairy in Peter Pan?",
+    9:"Traditionally, how many Wonders of the World are there?",
+    10:"Which is the tallest mammal?",
     //getQuestion function returns the Question statement based on Key passed to it
     getQuestion: function (keyIndex){
         return QuestionObject[keyIndex];
@@ -51,6 +56,11 @@ var AnswerObject = {
     3:"Radiation",
     4:"Terrier",
     5:"Baseball",
+    6:"Pig",
+    7:"Nero",
+    8:"Tinkerbell",
+    9:"Seven",
+    10:"Giraffe",
     //getAnswer function returns the Answer statement based on Key passed to it
     getAnswer: function(keyIndex){
     return AnswerObject[keyIndex];
@@ -140,11 +150,13 @@ else{
 
 //1: updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys array
 function updateUserSelection(letter ){
+    console.log("Inside updateUserSelection(letter)");        
     v_UserSelectionArray[v_UserSelectionArray.length] = letter;
 };
 
 //2: displayUserSelections function displays all the user character selections made
 function displayUserSelections(){
+    console.log("Inside displayUserSelections() ");       
      var displaySelection = "";
      for(i=0;i< v_UserSelectionArray.length; i++ ) {
         displaySelection = displaySelection +" " + v_UserSelectionArray[i];
@@ -155,6 +167,7 @@ function displayUserSelections(){
 //3: finds if the letter entered is in answer object and returns a boolean.
 
 function isLetterPresent(letter, keyIndex){
+    console.log("Inside findSimilarAnswerCharacter(letter, keyIndex) ");     
     for(i = 0; i < AnswerObject.getAnswer(keyIndex).length; i++){
         if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() == letter)
         { 
@@ -171,6 +184,7 @@ function isLetterPresent(letter, keyIndex){
 function findSimilarAnswerCharacter(letter, keyIndex){
     var j = 0;
     var letterIndexArray = [];
+    console.log("Inside findSimilarAnswerCharacter(letter, keyIndex) ");       
     for(i=0; i < AnswerObject.getAnswer(keyIndex).length; i++){
         if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() == letter)
         {       
@@ -185,6 +199,7 @@ function findSimilarAnswerCharacter(letter, keyIndex){
 
 //5: 
 function displayMatchedTypedLetter(){
+    console.log("Inside displayMatchedTypedLetter()");    
     var displayString = "";
     for (i = 0; i< v_UserCorrectSelectionArray.length; i++){ 
         displayString = displayString + " " + v_UserCorrectSelectionArray[i];
@@ -197,6 +212,7 @@ function displayMatchedTypedLetter(){
 
 function isAnswerMatch(keyIndex){
   var bool = true;
+  console.log("Inside isAnswerMatch(keyIndex)");
   for(i=0;i<AnswerObject.getAnswer(keyIndex).length; i++){
         if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() === v_UserCorrectSelectionArray[i].toLocaleUpperCase()){
             console.log("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
@@ -213,6 +229,7 @@ function isAnswerMatch(keyIndex){
 }
 
 function updateUserCorrectSelection(letter, keyIndex){
+    console.log("Inside updateUserCorrectSelection()");
     var matchedLetter = findSimilarAnswerCharacter(letter, keyIndex);
     for (i = 0, j = 0; i<AnswerObject.getAnswer(keyIndex).length; i++){
         if( i === matchedLetter[j]){ 
@@ -249,7 +266,7 @@ function newGame(){
     console.log("Inside newGame() ");
     if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
         reset();
-        indexQA = Math.round(Math.random() * 5);
+        indexQA = Math.round(Math.random() * 10);
         v_Question.textContent = QuestionObject.getQuestion(indexQA);
         console.log("New Game Started with indexQA: " + indexQA);
        // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
