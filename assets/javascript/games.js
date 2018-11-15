@@ -81,11 +81,9 @@ newGame();
     v_Wins.textContent = g_Wins;
     v_gameCount.textContent = g_GamesCounter;
     v_Games.textContent = g_Games;
-  //  v_GuessRemaining = g_Guesses;
     v_KeyEntered = event.key.toLocaleUpperCase();
     v_UserSelection.textContent = v_KeyEntered; 
     displayMatchedTypedLetter();
-//
  //   newGame();
     console.log(event.key);
     updateUserSelection(v_KeyEntered);
@@ -123,7 +121,6 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
                     displayMatchedTypedLetter(); 
                     /* if the letters entered matched the answer letters*/
                     if( isAnswerMatch(indexQA) ){
-                    //    alert("isAnswerMatch Block ^^^^^^^^^^^^^^");
                         console.log("isAnswerMatch Block ^^^^^^^^^^^^^^");                        
                         g_Wins++;
                         v_Wins.textContent = g_Wins;
@@ -131,7 +128,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
                         refreshDisplay();
                         flag_GameChange = !flag_GameChange;
                         newGame();
-                        alert(" WHEN LETTERS MATCHED flag_GameChange: "+flag_GameChange);
+                        console.log(" WHEN LETTERS MATCHED flag_GameChange: "+flag_GameChange);
                     }
                 }
                     else{
@@ -167,7 +164,8 @@ function displayUserSelections(){
 //3: finds if the letter entered is in answer object and returns a boolean.
 
 function isLetterPresent(letter, keyIndex){
-    console.log("Inside findSimilarAnswerCharacter(letter, keyIndex) ");     
+    console.log("Inside findSimilarAnswerCharacter(letter, keyIndex) ");  
+    console.log(AnswerObject.getAnswer(keyIndex))   ;
     for(i = 0; i < AnswerObject.getAnswer(keyIndex).length; i++){
         if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() == letter)
         { 
@@ -266,7 +264,7 @@ function newGame(){
     console.log("Inside newGame() ");
     if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
         reset();
-        indexQA = Math.round(Math.random() * 10);
+        indexQA = Math.ceil(Math.random() * 10);
         v_Question.textContent = QuestionObject.getQuestion(indexQA);
         console.log("New Game Started with indexQA: " + indexQA);
        // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
