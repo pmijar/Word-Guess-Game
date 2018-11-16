@@ -106,7 +106,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
             flag_GameChange = true;
             newGame();
             g_Games--;
-            alert("GUESES  is 0 : flag_GameChange: " + flag_GameChange);
+           // alert("GUESES  is 0 : flag_GameChange: " + flag_GameChange);
             v_Games.textContent =  g_Games ;
             refreshDisplay();
         }
@@ -195,7 +195,7 @@ function findSimilarAnswerCharacter(letter, keyIndex){
 };
 
 
-//5: 
+//5: This function displays the matched letter in the screen.
 function displayMatchedTypedLetter(){
     console.log("Inside displayMatchedTypedLetter()");    
     var displayString = "";
@@ -226,6 +226,8 @@ function isAnswerMatch(keyIndex){
     return bool;
 }
 
+//7. This function dsiplays the user entries in the v_UserCorrectSelectionArray array declaerd globally
+
 function updateUserCorrectSelection(letter, keyIndex){
     console.log("Inside updateUserCorrectSelection()");
     var matchedLetter = findSimilarAnswerCharacter(letter, keyIndex);
@@ -241,6 +243,7 @@ function updateUserCorrectSelection(letter, keyIndex){
 }
 
 
+// 8. This is a reset function that initializes the g_Guesses variable to 5, v_UserSelectionArray and v_UserCorrectSelectionArray are initailzed to empty.
 function reset(){
     console.log("Inside reset() function");
     g_Guesses = 5 ;
@@ -248,6 +251,8 @@ function reset(){
     v_UserCorrectSelectionArray = [];
 };
 
+
+//9. The refreshDisplay function is called to refresh the screen display to user with current values.
 function refreshDisplay()
 {
     console.log("Inside refreshDisplay()");
@@ -260,6 +265,8 @@ function refreshDisplay()
     v_gameCount.textContent = g_GamesCounter;
 }
 
+
+//10. The newGame function is called to when a new game needs to be created  with default values and questions.
 function newGame(){
     console.log("Inside newGame() ");
     if(flag_GameChange){ //Only creates a index for question/answer when there is a game change
