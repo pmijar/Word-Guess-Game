@@ -90,7 +90,7 @@ newGame();
     displayUserSelections();
 
    // v_EntryMessage.textContent =  "Alphabet typed is " + v_KeyEntered ;
-
+   v_EntryMessage.textContent = "";
 
 
 // only valid key codes displayed alphabets only
@@ -140,8 +140,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
         }
     }
 else{
-    var strMessage = "Please enter characters only !!!!";
-    strMessage.fontcolor('red');
+    var strMessage = "Please enter letters only !!!!";
     v_EntryMessage.textContent = strMessage;
 } ; 
 };
