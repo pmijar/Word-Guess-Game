@@ -1,6 +1,7 @@
 body{
     background-image: url("../images/stars.jpg");
     background-size:cover;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
 .jumbotron{

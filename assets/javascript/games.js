@@ -89,7 +89,7 @@ newGame();
     updateUserSelection(v_KeyEntered);
     displayUserSelections();
 
-    v_EntryMessage.textContent =  "You typed : " + v_KeyEntered ;
+   // v_EntryMessage.textContent =  "Alphabet typed is " + v_KeyEntered ;
 
 
 
@@ -140,7 +140,9 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
         }
     }
 else{
-    v_EntryMessage.textContent = "Please enter characters only !!!!";
+    var strMessage = "Please enter characters only !!!!";
+    strMessage.fontcolor('red');
+    v_EntryMessage.textContent = strMessage;
 } ; 
 };
 
