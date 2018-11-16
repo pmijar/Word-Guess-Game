@@ -2,7 +2,7 @@
 <html lang="en-us">
 <head>
   <meta charset="UTF-8">
-  <title>Word Game</title>
+  <title>Word Game by Prashanth Mijar</title>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
  
@@ -10,59 +10,60 @@
 
 <body>
     <header>
-        <div class="container p-3 mb-2 bg-primary text-white rounded">
+
             <div class="row">
-                <div class="col-sm-12" style="text-align: center; font-size: 40px">
-                    Word Guess Game
+                <div class="col-sm-12">
+                    <h1>Word Guess Game </h1>
                 </div>
             </div>
-        </div>
+
     </header>
 
-    <div class="container p-3 mb-2 bg-warning text-dark rounded">
-        <div class="jumbotron">
             <div class="row">
-                <div class="col-sm-12 btn-group">
-                    <h2>This is Game # : <span id="gameCount"></span></h2>
+                <div class="col-sm-12 ">
+                    <h2>This is Game # : <span id="gameCount"></span> </h2>
                 </div>               
-            </div>
-        </div>
     </div>
 
-    <div class="container p-3 mb-2 bg-secondary text-white rounded">
+    <div class="container rounded">
         <div class="row">
             <div class="col-sm-5">  
-                    <div class="jumbotron p-3 mb-2 bg-info text-white">
+                    <div class="jumbotron text-white">
                             <h5>Score Section</h5><br>
                             <p> Game Remaining : <span id="Games">0</span></p>                           
                             <p> Wins # : <span id="Wins">0</span></p>
                             <p> Guess Remaining : <span id="GuessRemaining">5</span></p>     
                             <br>
-                            <p>Message : <span id="entryMessage"></span></p>     
-                            <h4>You just typed : <span id="UserSelection"></span></h4>                  
+                            <p>Message : <br> <span id="entryMessage"></span></p>             
                     </div>   
             </div>
             <div class = "col-sm-7">
-                <div class="jumbotron p-3 mb-2 bg-info text-white">
+                <div class="jumbotron text-white">
                 <div class = "row">
                     <div class ="col-sm-12">
-                            <h5> Question</h5>  
+                            <h5> Question</h5> 
+                            <br> 
                             <p><span id="Question">Question Statement</span></p> 
                     </div>
                 </div>
                 <br>
                 <div class = "row">
                         <div class ="col-sm-12">
-                                <h5>Valid Selections</h5><br>
-                                 <span id="WordLetter"></span>
+                                <p>Valid Selections</p><br>
+                                <h6><span id="WordLetter"></span></h6>
                         </div>
                 </div> 
                 <br>                      
                 <div class = "row">
                         <div class ="col-sm-12">
-                                <h5>Letter selected : <span id="CapturedUserSelection"></span></h5>
+                                <p>Letter selected : <span id="CapturedUserSelection"></span></p>
                         </div>
-                </div>                 
+                </div>  
+                <div class = "row">
+                        <div class ="col-sm-12">
+                                <p>You just typed -> <span id="UserSelection"></span></p>
+                        </div>
+                </div>                                 
                 </div>
             </div>
 
