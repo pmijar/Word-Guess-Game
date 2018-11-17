@@ -11,17 +11,23 @@ var v_Games = document.getElementById("Games");
 var v_gameCount = document.getElementById("gameCount");
 
 
+
 // Global Array to store the selection made by user on key down
-var v_UserSelectionArray = [];
-var v_UserCorrectSelectionArray = [];
+var g_UserSelectionArray = [];
+var g_UserCorrectSelectionArray = [];
+
+//Game Constants
+
+var MAX_GAMES = 3;
+var MAX_GUESSES = 5;
 
 // Global Variables need to be reset on reset operation;
-var g_Guesses = 5;
-var g_Games = 3;
+var g_Guesses = MAX_GUESSES;
+var g_Games = MAX_GAMES;
 var g_Wins = 0;
 var flag_GameChange = true;
 var indexQA ;
-var g_GamesCounter = 0;
+var g_GamesCounter = 1;
 
 
 
@@ -84,7 +90,6 @@ newGame();
     v_KeyEntered = event.key.toLocaleUpperCase();
     v_UserSelection.textContent = v_KeyEntered; 
     displayMatchedTypedLetter();
- //   newGame();
     console.log(event.key);
     updateUserSelection(v_KeyEntered);
     displayUserSelections();
@@ -98,7 +103,16 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
 
         
     if(g_Games === 0){
-        alert("Game Over !!!!");
+        alert("Game Over !!!!, Please refresh this page to play Game");
+        //clear all the display values that need not be presented to the user.
+        {
+            v_GuessRemaining.textContent = 0;  
+            v_WordLetter.textContent = "";
+            v_Question.textContent = "";
+            v_CapturedUserSelection.textContent = "";
+            v_gameCount.textContent = MAX_GAMES;
+            v_EntryMessage.textContent = "";
+        }
     }
     else{
         if(g_Guesses === 0 ){
@@ -106,7 +120,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
             flag_GameChange = true;
             newGame();
             g_Games--;
-           // alert("GUESES  is 0 : flag_GameChange: " + flag_GameChange);
+            // alert("GUESES  is 0 : flag_GameChange: " + flag_GameChange);
             v_Games.textContent =  g_Games ;
             refreshDisplay();
         }
@@ -127,6 +141,9 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
                         v_Games.textContent =  g_Games ;
                         refreshDisplay();
                         flag_GameChange = !flag_GameChange;
+                        alert("You are right, the answer is " + AnswerObject.getAnswer(indexQA));
+                        g_Games--;
+                        v_Games.textContent =  g_Games ;
                         newGame();
                         console.log(" WHEN LETTERS MATCHED flag_GameChange: "+flag_GameChange);
                     }
@@ -141,7 +158,20 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
     }
 else{
     var strMessage = "Please enter letters only !!!!";
-    v_EntryMessage.textContent = strMessage;
+    if(g_Games === 0){
+        v_EntryMessage.textContent = "";
+        {
+            v_GuessRemaining.textContent = 0;  
+            v_WordLetter.textContent = "";
+            v_Question.textContent = "";
+            v_CapturedUserSelection.textContent = "";
+            v_gameCount.textContent = MAX_GAMES;
+            v_EntryMessage.textContent = "";
+        }
+    }
+    else{
+        v_EntryMessage.textContent = strMessage;
+    };
 } ; 
 };
 
@@ -149,15 +179,15 @@ else{
 //1: updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys array
 function updateUserSelection(letter ){
     console.log("Inside updateUserSelection(letter)");        
-    v_UserSelectionArray[v_UserSelectionArray.length] = letter;
+    g_UserSelectionArray[g_UserSelectionArray.length] = letter;
 };
 
 //2: displayUserSelections function displays all the user character selections made
 function displayUserSelections(){
     console.log("Inside displayUserSelections() ");       
      var displaySelection = "";
-     for(i=0;i< v_UserSelectionArray.length; i++ ) {
-        displaySelection = displaySelection +" " + v_UserSelectionArray[i];
+     for(i=0;i< g_UserSelectionArray.length; i++ ) {
+        displaySelection = displaySelection +" " + g_UserSelectionArray[i];
      };
     v_CapturedUserSelection.textContent = displaySelection ;
     };
@@ -200,8 +230,8 @@ function findSimilarAnswerCharacter(letter, keyIndex){
 function displayMatchedTypedLetter(){
     console.log("Inside displayMatchedTypedLetter()");    
     var displayString = "";
-    for (i = 0; i< v_UserCorrectSelectionArray.length; i++){ 
-        displayString = displayString + " " + v_UserCorrectSelectionArray[i];
+    for (i = 0; i< g_UserCorrectSelectionArray.length; i++){ 
+        displayString = displayString + " " + g_UserCorrectSelectionArray[i];
     }
     v_WordLetter.textContent = displayString;
 };
@@ -213,28 +243,26 @@ function isAnswerMatch(keyIndex){
   var bool = true;
   console.log("Inside isAnswerMatch(keyIndex)");
   for(i=0;i<AnswerObject.getAnswer(keyIndex).length; i++){
-        if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() === v_UserCorrectSelectionArray[i].toLocaleUpperCase()){
-            console.log("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
-           // alert("v_UserCorrectSelectionArray["+i+"] = "+v_UserCorrectSelectionArray[i]);
-            continue;
+        if(AnswerObject.getAnswer(keyIndex)[i].toLocaleUpperCase() === g_UserCorrectSelectionArray[i].toLocaleUpperCase()){
+            console.log("g_UserCorrectSelectionArray["+i+"] = "+g_UserCorrectSelectionArray[i]);
+           continue;
         }
         else{
             bool = false;
             break;
         }
     }
-   // alert("isAnswerMatch Function call bool : " + bool);
     return bool;
 }
 
-//7. This function dsiplays the user entries in the v_UserCorrectSelectionArray array declaerd globally
+//7. This function dsiplays the user entries in the g_UserCorrectSelectionArray array declaerd globally
 
 function updateUserCorrectSelection(letter, keyIndex){
     console.log("Inside updateUserCorrectSelection()");
     var matchedLetter = findSimilarAnswerCharacter(letter, keyIndex);
     for (i = 0, j = 0; i<AnswerObject.getAnswer(keyIndex).length; i++){
         if( i === matchedLetter[j]){ 
-            v_UserCorrectSelectionArray[i] = letter;
+            g_UserCorrectSelectionArray[i] = letter;
             j++;
         }
         else{
@@ -244,12 +272,12 @@ function updateUserCorrectSelection(letter, keyIndex){
 }
 
 
-// 8. This is a reset function that initializes the g_Guesses variable to 5, v_UserSelectionArray and v_UserCorrectSelectionArray are initailzed to empty.
+// 8. This is a reset function that initializes the g_Guesses variable to 5, g_UserSelectionArray and g_UserCorrectSelectionArray are initailzed to empty.
 function reset(){
     console.log("Inside reset() function");
     g_Guesses = 5 ;
-    v_UserSelectionArray = [];
-    v_UserCorrectSelectionArray = [];
+    g_UserSelectionArray = [];
+    g_UserCorrectSelectionArray = [];
 };
 
 
@@ -277,12 +305,25 @@ function newGame(){
         console.log("New Game Started with indexQA: " + indexQA);
        // v_WordLetter.textContent = AnswerObject.getAnswer(indexQA);
         for(i=0; i < AnswerObject.getAnswer(indexQA).length; i++){
-            v_UserCorrectSelectionArray[i] = " _ ";
+            g_UserCorrectSelectionArray[i] = " _ ";
         };
-        g_GamesCounter++;
-      //  g_Games--;
+        if(g_Games === MAX_GAMES){
+            g_GamesCounter = 1;
+        }
+        else if(g_Games === 0 ){
+            g_GamesCounter = MAX_GAMES;
+            v_GuessRemaining.textContent = 0;  
+            v_WordLetter.textContent = "";
+            v_Question.textContent = "";
+            v_CapturedUserSelection.textContent = "";
+            v_gameCount.textContent = MAX_GAMES;
+        }
+        else{
+            g_GamesCounter = MAX_GAMES - g_Games + 1;
+        }
         refreshDisplay();
+        v_UserSelection.textContent = "";
+        v_gameCount.textContent = g_GamesCounter;
         flag_GameChange = !flag_GameChange;
     }
-
 }
