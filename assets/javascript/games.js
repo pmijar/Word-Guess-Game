@@ -160,14 +160,6 @@ else{
     var strMessage = "Please enter letters only !!!!";
     if(g_Games === 0){
         v_EntryMessage.textContent = "";
-        {
-            v_GuessRemaining.textContent = 0;  
-            v_WordLetter.textContent = "";
-            v_Question.textContent = "";
-            v_CapturedUserSelection.textContent = "";
-            v_gameCount.textContent = MAX_GAMES;
-            v_EntryMessage.textContent = "";
-        }
     }
     else{
         v_EntryMessage.textContent = strMessage;
