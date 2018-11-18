@@ -1,7 +1,7 @@
 # Word-Guess-Game #
 
 
-#### Game Information ####
+## Game Information ##
 The Word-Guess Game is an user interactive game, where the user is presented with a question and has to guess the answer. The game displays the number of letters in the word to guess with an underline. 
 
 Person deploying this code can do the following set up for the game in games.js file:
@@ -19,7 +19,7 @@ When the user types a letter the system checks if this letter matches any of the
 When the user guesses the correct answer within the allowed MAX_GUESSES an win is recorded under score section with the alert message.
 
 
-#### Game set up ####
+## Game set up ##
 
 Pre-requisite:
 Have git installed in your machine and have a github profile created to pull this code. 
@@ -30,5 +30,9 @@ Windows user need to install Gitbash for mac users use mac Terminal application.
 3. You should now have a folder " Word-Guess-Game" created.
 4. Navigate to **index.html** page and click on it.
 5. You should be able to launch this game and start playing.
+
+## Contact Me ##  
+
+If you have any suggestions please [email me](mailto:Prashanth.Mijar@gmail.com)
 
 
