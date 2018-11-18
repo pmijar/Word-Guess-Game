@@ -18,8 +18,8 @@ var g_UserCorrectSelectionArray = [];
 
 //Game Constants
 
-var MAX_GAMES = 3;
-var MAX_GUESSES = 5;
+var MAX_GAMES = 4;
+var MAX_GUESSES = 3;
 
 // Global Variables need to be reset on reset operation;
 var g_Guesses = MAX_GUESSES;
@@ -172,8 +172,15 @@ else{
 
 //1: updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys array
 function updateUserSelection(letter ){
-    console.log("Inside updateUserSelection(letter)");        
-    g_UserSelectionArray[g_UserSelectionArray.length] = letter;
+    console.log("Inside updateUserSelection(letter)"); 
+    if(letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90){ 
+     //   alert("Value selected : " + letter);
+     //   alert("Keycode Value is : "+ letter.charCodeAt(0));
+        g_UserSelectionArray[g_UserSelectionArray.length] = letter;
+    }
+    else{
+       // alert("Value selected is NOT a letter !!!!");
+    }
 };
 
 //2: displayUserSelections function displays all the user character selections made
@@ -269,7 +276,7 @@ function updateUserCorrectSelection(letter, keyIndex){
 // 8. This is a reset function that initializes the g_Guesses variable to 5, g_UserSelectionArray and g_UserCorrectSelectionArray are initailzed to empty.
 function reset(){
     console.log("Inside reset() function");
-    g_Guesses = 5 ;
+    g_Guesses = MAX_GUESSES ;
     g_UserSelectionArray = [];
     g_UserCorrectSelectionArray = [];
 };
