@@ -92,7 +92,7 @@ newGame();
     v_UserSelection.textContent = v_KeyEntered; 
     displayMatchedTypedLetter();
     console.log(event.key);
-    updateUserSelection(v_KeyEntered);
+    updateUserSelection(v_KeyEntered, event.keyCode);
     displayUserSelections();
 
    // v_EntryMessage.textContent =  "Alphabet typed is " + v_KeyEntered ;
@@ -171,11 +171,12 @@ else{
 
 
 //1: updateUserSelection function takes the letter pressed in keyboard and appends it to user pressed keys array
-function updateUserSelection(letter ){
-    console.log("Inside updateUserSelection(letter)"); 
-    if(letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90){ 
-     //   alert("Value selected : " + letter);
-     //   alert("Keycode Value is : "+ letter.charCodeAt(0));
+function updateUserSelection(letter, letter_keyCode){
+    console.log("Inside updateUserSelection(letter, letter_keyCode)"); 
+  //  if(letter.charCodeAt(0) >= 65 && letter.charCodeAt(0) <= 90){ 
+    if(letter_keyCode >= 65 && letter_keyCode <= 90){ 
+        console.log("Value selected : " + letter);
+        console.log("Keycode Value is : "+ letter_keyCode);
         g_UserSelectionArray[g_UserSelectionArray.length] = letter;
     }
     else{
