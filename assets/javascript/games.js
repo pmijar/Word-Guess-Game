@@ -28,7 +28,7 @@ var g_Wins = 0;
 var flag_GameChange = true;
 var indexQA ;
 var g_GamesCounter = 1;
-var audio = new Audio('../images/Short_triumphal_fanfare.mp3');
+var winAudio = new Audio('./assets/images/Short_triumphal_fanfare.mp3');
 
 
 
@@ -132,7 +132,6 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
             if( isLetterPresent(v_KeyEntered, indexQA)/* if the typed key matches the answer presented TRUE or FALSE*/){
              //       alert("isLetterPresent Block");
                     console.log("isLetterPresent Block");
-                    audio.play();
                     updateUserCorrectSelection(v_KeyEntered, indexQA); // Displays the correct value selected
                     displayMatchedTypedLetter(); 
                     /* if the letters entered matched the answer letters*/
@@ -143,6 +142,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
                         v_Games.textContent =  g_Games ;
                         refreshDisplay();
                         flag_GameChange = !flag_GameChange;
+                        winAudio.play();
                         alert("You are right, the answer is " + AnswerObject.getAnswer(indexQA));
                         g_Games--;
                         v_Games.textContent =  g_Games ;
