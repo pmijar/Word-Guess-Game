@@ -6,8 +6,8 @@ The Word-Guess Game is an user interactive game, where the user is presented wit
 
 Person deploying this code can do the following set up for the game in games.js file:
 
-*Allow maximum number of games by setting the variable MAX_GAMES.*<br>
-*Allow maximum number of gueses per game by setting the variable MAX_GUESSES.*
+*Allow maximum number of games by setting the variable MAX_GAMES.*      
+*Allow maximum number of gueses per game by setting the variable MAX_GUESSES.*      
 
 
 e.g. <br>
