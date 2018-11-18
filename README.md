@@ -10,7 +10,7 @@ Person deploying this code can do the following set up for the game in games.js 
 *Allow maximum number of gueses per game by setting the variable MAX_GUESSES.*      
 
 
-e.g. <br>
+e.g.   
 Parameter       | Description
 ------------    | -------------
 MAX_GAMES = 3   | Maximum games played in a session 
