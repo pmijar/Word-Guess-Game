@@ -104,7 +104,7 @@ if(event.keyCode >= 65 && event.keyCode <= 90) {
 
         
     if(g_Games === 0){
-        alert("Game Over !!!!, Please refresh this page to play Game");
+        alert("Game Over !!!!, You have played " +MAX_GAMES+" games. \nPlease refresh this page to play a new game");
         //clear all the display values that need not be presented to the user.
         {
             v_GuessRemaining.textContent = 0;  

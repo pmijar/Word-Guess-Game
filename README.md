@@ -17,6 +17,7 @@ Person deploying this code can do the following set up for the game in games.js 
 When the user types a letter the system checks if this letter matches any of the letters in the answer, if it matches those letters are displayed to user, if not then the user guess is reduced.
 
 When the user guesses the correct answer within the allowed MAX_GUESSES an win is recorded under score section with the alert message.
+A trumpet is played when you win each game.
 
 
 ## Game set up ##
