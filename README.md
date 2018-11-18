@@ -10,11 +10,11 @@ Person deploying this code can do the following set up for the game in games.js 
 *Allow maximum number of gueses per game by setting the variable MAX_GUESSES.*
 
 
-e.g. 
-|Parameter        | Description
-------------      | -------------
-| MAX_GAMES = 3   | Maximum games played in a session 
-| MAX_GUESSES = 5 | Maximum guesses per game played   
+e.g. <br>
+Parameter       | Description
+------------    | -------------
+MAX_GAMES = 3   | Maximum games played in a session 
+MAX_GUESSES = 5 | Maximum guesses per game played   
 
 When the user types a letter the system checks if this letter matches any of the letters in the answer, if it matches those letters are displayed to user, if not then the user guess is reduced.
 
