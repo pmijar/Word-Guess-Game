@@ -1,4 +1,11 @@
 
+/*
+Rutgers Full Stack coding Bootcamp Program
+Description: This is a Word Game where system randomly poses a question and user needs to provide a answer for this question
+Author : Prashanth K Mijar
+Date: 17-Nov-2018 
+*/
+
 // Let's start by grabbing a reference to the <span> below and storing in a variable.
 var v_Wins = document.getElementById("Wins");
 var v_GuessRemaining = document.getElementById("GuessRemaining");
